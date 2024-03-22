@@ -6,10 +6,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { ClientProxy } from '@nestjs/microservices';
 import { EmailService } from '../email/email.service';
-import { User } from './users.model'; 
+import { User } from './users.model';
 
 @Injectable()
-export class UsersService {
+class UsersService {
   constructor(
     @InjectModel('User') private readonly userModel: Model<any>,
     @Inject('RABBITMQ_CLIENT') private readonly client: ClientProxy,
@@ -45,7 +45,10 @@ export class UsersService {
       const response = await axios.get(`https://reqres.in/api/users/${userId}`);
       const avatarUrl = response.data.data.avatar;
       const avatarData = await this.downloadImage(avatarUrl);
-      await this.userModel.updateOne({ userId }, { $set: { avatar: avatarData } });
+      await this.userModel.updateOne(
+        { userId },
+        { $set: { avatar: avatarData } },
+      );
       return avatarData;
     } else {
       return user.avatar;
@@ -58,16 +61,17 @@ export class UsersService {
     return base64Data;
   }
 
-
   async deleteAvatar(userId: string) {
     const user = await this.userModel.findOne({ userId });
-    
+
     if (user && user.avatar) {
-        // Delete the avatar file
-        fs.unlinkSync(path.join(__dirname, 'avatars', `${userId}.png`));
-        
-        // Unset the avatar field in the user document
-        await this.userModel.updateOne({ userId }, { $unset: { avatar: 1 } });
+      // Delete the avatar file
+      fs.unlinkSync(path.join(__dirname, 'avatars', `${userId}.png`));
+
+      // Unset the avatar field in the user document
+      await this.userModel.updateOne({ userId }, { $unset: { avatar: 1 } });
     }
+  }
 }
-}
+
+export { UsersService };

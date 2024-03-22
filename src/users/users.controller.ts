@@ -1,10 +1,17 @@
-import { Controller, Post, Get, Delete, Param, Res, Body } from '@nestjs/common';
+import {
+  Controller,
+  Post,
+  Get,
+  Delete,
+  Param,
+  Res,
+  Body,
+} from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Response } from 'express';
 
-
 @Controller('api/users')
-export class UsersController {
+class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
@@ -34,3 +41,5 @@ export class UsersController {
     return this.usersService.deleteAvatar(userId);
   }
 }
+
+export { UsersController };

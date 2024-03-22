@@ -1,73 +1,61 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## README
+# Introduction
+ - This is a RESTful API built using TypeScript, NestJS framework, MongoDB, and RabbitMQ. The API provides endpoints for user management, fetching user data from an external API, and handling user avatars.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+# Prerequisites
+- TypeScript 3.4 and above
+- NestJS Framework (refer to NestJS Documentation)
+- MongoDB 4.4 and above
+- RabbitMQ 3.7 and above
+- Installation
+- Clone the repository:
 
-## Description
+# Unzip the file
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Install dependencies:
 
-## Installation
 
-```bash
-$ npm install
-```
+1. cd <project_folder>
+2. npm install
+# Configuration
+ - Make sure you have MongoDB and RabbitMQ running on your local machine or provide appropriate connection strings in the configuration file (config.env).
 
-## Running the app
+## Usage
 
-```bash
-# development
-$ npm run start
+# Endpoints
+1. POST /api/users
 
-# watch mode
-$ npm run start:dev
+   - Description: Create a new user entry in the database.
+   - Upon creation, send a dummy email and RabbitMQ event.
+   - No consumer is needed for email and RabbitMQ events.
+   - GET /api/user/{userId}
 
-# production mode
-$ npm run start:prod
-```
+* Description: Retrieve user data from an external API (https://reqres.in/api/users/{userId}) and return it in JSON representation.
 
-## Test
+2. GET /api/user/{userId}
 
-```bash
-# unit tests
-$ npm run test
+Retrieves data from https://reqres.in/api/users/{userId} and returns a user in JSON representation.
 
-# e2e tests
-$ npm run test:e2e
+3. GET /api/user/{userId}/avatar
 
-# test coverage
-$ npm run test:cov
-```
+* Description: Retrieve user avatar.
+* On the first request, save the image as a plain file stored in MongoDB with user ID and hash. Return its base64-encoded representation.
+* On subsequent requests, return the previously saved file in base64-encoded representation retrieved from the database.
 
-## Support
+4. DELETE /api/user/{userId}/avatar
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+* Description: Remove the user avatar file from the file system storage and remove the stored entry from the database.
 
-## Stay in touch
+# Running the Application
+- To run the application, execute the following command:
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+   * npm run start
 
+- The application will start on the configured port (default: 3000).
+
+# Contributing
+Contributions are welcome! Please feel free to submit issues and pull requests.
 ## License
 
 Nest is [MIT licensed](LICENSE).

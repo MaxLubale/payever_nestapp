@@ -4,12 +4,12 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { UsersController } from './users/users.controller';
 import { EmailService } from './email/email.service';
 import { UsersService } from './users/users.service';
-import { UserModel } from './users/users.model'; 
+import { UserModel } from './users/users.model';
 
 @Module({
   imports: [
     MongooseModule.forRoot('mongodb://localhost/nestjs_db'),
-    MongooseModule.forFeature([{ name: 'User', schema: UserModel.schema }]), 
+    MongooseModule.forFeature([{ name: 'User', schema: UserModel.schema }]),
     ClientsModule.register([
       {
         name: 'RABBITMQ_CLIENT',
