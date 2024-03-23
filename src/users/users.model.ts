@@ -1,10 +1,11 @@
+// users.model.ts
 import * as mongoose from 'mongoose';
 
 export interface User {
   firstName: string;
   lastName: string;
   email: string;
-  avatar?: string; // Optional avatar field
+  avatar?: string;
 }
 
 export const UserSchema = new mongoose.Schema<User>({

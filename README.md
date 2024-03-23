@@ -54,6 +54,10 @@ Retrieves data from https://reqres.in/api/users/{userId} and returns a user in J
 
 - The application will start on the configured port (default: 3000).
 
+## Testing
+
+   * npx jest
+
 # Contributing
 Contributions are welcome! Please feel free to submit issues and pull requests.
 ## License
