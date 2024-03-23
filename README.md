@@ -63,3 +63,7 @@ Contributions are welcome! Please feel free to submit issues and pull requests.
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+That's it! You're now ready to start using and exploring our NestJS application. If you have any questions or encounter any issues, please don't hesitate to reach out to us.
+
+Happy coding! 🚀
