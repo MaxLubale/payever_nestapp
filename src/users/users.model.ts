@@ -1,4 +1,3 @@
-// users.model.ts
 import * as mongoose from 'mongoose';
 
 export interface User {

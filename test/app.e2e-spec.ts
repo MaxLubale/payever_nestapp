@@ -15,10 +15,13 @@ describe('AppController (e2e)', () => {
     await app.init();
   });
 
-  it('/ (GET)', () => {
-    return request(app.getHttpServer())
+  it('/ (GET)', async () => {
+    // Make the test function async to use await
+    await request(app.getHttpServer()) // await the request
       .get('/')
       .expect(200)
       .expect('Hello World!');
   });
 });
+
+export {};
